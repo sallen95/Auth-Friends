@@ -12,15 +12,21 @@ const FriendsList = () => {
     const [formValues, setFormValues] = useState(initialFormValues);
 
     const handleChange = e => {
-        setFormValues(
+        setFormValues({
             ...formValues,
-            [e.target.name]=e.target.value
-        )
+            [e.target.name]: e.target.value
+        })
     }
 
     const handleSubmit = e => {
         e.preventDefault();
-        
+        axios.post('http://localhost:5000/api/friends', formValues)
+        .then(res => {
+            console.log(res)
+        })
+        .catch(err => {
+            console.log(err)
+        })
     }
 
     useEffect(() => {
