@@ -20,12 +20,18 @@ const FriendsList = () => {
 
     const handleSubmit = e => {
         e.preventDefault();
-        axios.post('http://localhost:5000/api/friends', formValues)
+        axios.post('http://localhost:5000/api/friends', formValues, {
+            headers: {
+                authorization: localStorage.getItem("token")
+            }
+        })
         .then(res => {
             console.log(res)
+            setFriends([...friends, formValues])
         })
         .catch(err => {
             console.log(err)
+            setFormValues(initialFormValues)
         })
     }
 
